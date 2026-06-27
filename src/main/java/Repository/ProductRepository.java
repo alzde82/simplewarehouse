@@ -71,4 +71,38 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
 
         return list;
     }
+    public int updateProductQuantity(int quantity,int id) throws SQLException {
+        Connection connection = jdbcConnection.getConnection();
+        String update= "UPDATE product SET quantity= quantity+ (?) WHERE ID =?";
+        PreparedStatement preparedStatement=connection.prepareStatement(update);
+        preparedStatement.setInt(1,quantity);
+        preparedStatement.setInt(2,id);
+        int result=preparedStatement.executeUpdate();
+        jdbcConnection.closeConnections(connection,preparedStatement);
+        return result;
+
+    }
+    public int QuantityOfProductById(int id) throws SQLException {
+        Connection connection = jdbcConnection.getConnection();
+        String select= "SELECT quantity FROM product WHERE id =?";
+        PreparedStatement preparedStatement=connection.prepareStatement(select);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet=preparedStatement.executeQuery();
+        int result=resultSet.getInt("quantity");
+        jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+        return result;
+
+    }
+    public boolean isProductIdExists(int id) throws SQLException {
+        Connection connection = jdbcConnection.getConnection();
+        String select ="select * from product where id=?";
+        PreparedStatement preparedStatement=connection.prepareStatement(select);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet=preparedStatement.executeQuery();
+        boolean result=resultSet.next();
+        jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+        return result;
+
+
+    }
 }

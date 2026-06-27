@@ -34,14 +34,17 @@ public class Main {
 //       System.out.println(productService.add(product));
 
        //-->ListOfProductsByName
-        if(productService.searchForProductByName(product)==null)
-            System.out.println(-1);
-        else{
-            DynamicArrays list=productService.searchForProductByName(product);
-            for (int i = 0; i < list.length() ; i++) {
-                System.out.println(list.findObjectByIndex(i));
-            }
-}
+//        if(productService.searchForProductByName(product)==null)
+//            System.out.println(-1);
+//        else{
+//            DynamicArrays list=productService.searchForProductByName(product);
+//            for (int i = 0; i < list.length() ; i++) {
+//                System.out.println(list.findObjectByIndex(i));
+//            }
+       System.out.println(productService.increaseQuantityOfProduct(10,7));
+
    }
 
-}
+   }
+
+
