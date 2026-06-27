@@ -2,6 +2,10 @@ package Repository;
 import java.sql.*;
 import Dto.JDBCConnection;
 import Model.Product;
+import org.DynamicArray.DynamicArrays;
+
+import javax.xml.transform.Result;
+
 public class ProductRepository {
 private     JDBCConnection jdbcConnection=new JDBCConnection();
 
@@ -18,7 +22,7 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
     }
     public boolean isProductNameExists(String name) throws SQLException {
         Connection connection=jdbcConnection.getConnection();
-        String select = "SELECT *FROM product WHERE name =?";
+        String select = "SELECT *FROM product WHERE name = ?";
         PreparedStatement preparedStatement=connection.prepareStatement(select , ResultSet.TYPE_SCROLL_INSENSITIVE ,
                 ResultSet.CONCUR_READ_ONLY);
         preparedStatement.setString(1,name);
@@ -37,5 +41,27 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         int result=preparedStatement.executeUpdate();
         jdbcConnection.closeConnections(connection,preparedStatement);
         return result;
+    }
+    public DynamicArrays searchForProductByName(String name) throws SQLException {
+
+        DynamicArrays list=new DynamicArrays("Product");
+        Connection connection = jdbcConnection.getConnection();
+        String select ="SELECT * FROM product WHERE name LIKE  ?";
+        PreparedStatement preparedStatement=connection.prepareStatement(select , ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet=preparedStatement.executeQuery();
+
+            if(!resultSet.next())
+                return null;
+            do{
+                Product product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
+                        ,resultSet.getInt("categoryid"));
+                product.setId(resultSet.getInt("id"));
+                list.add(product);
+            }
+            while(resultSet.next());
+        return list;
+
     }
 }

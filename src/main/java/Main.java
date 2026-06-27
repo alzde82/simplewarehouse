@@ -1,5 +1,6 @@
 import Service.*;
 import Model.*;
+import org.DynamicArray.DynamicArrays;
 import org.w3c.dom.ls.LSOutput;
 
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ public class Main {
 
        Category category=new Category(2,"test");
 
-       Product product=new Product(1,"test",10,1);
+       Product product=new Product("m",10,1);
 
         //-->addCategory
        //       int result;
@@ -30,7 +31,17 @@ public class Main {
 //      System.out.println(productService.add(product));
 
        //-->deleteProduct
-       System.out.println(productService.delete(product));
+//       System.out.println(productService.add(product));
+
+       //-->ListOfProductsByName
+        if(productService.searchForProductByName(product)==null)
+            System.out.println(-1);
+        else{
+            DynamicArrays list=productService.searchForProductByName(product);
+            for (int i = 0; i < list.length() ; i++) {
+                System.out.println(list.findObjectByIndex(i));
+            }
+}
    }
 
 }
