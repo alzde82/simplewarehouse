@@ -30,4 +30,10 @@ public int delete(Product product) throws SQLException {
         else return dataBase.searchForProductByName(name);
 
 }
+    public int increaseQuantityOfProduct(int id, int addedquantity) throws SQLException {
+    if(!dataBase.isProductIdExists(id))
+        return -1;
+    return dataBase.updateProductQuantity(addedquantity,id);
+}
+
 }
