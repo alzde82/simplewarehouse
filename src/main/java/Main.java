@@ -16,7 +16,7 @@ public class Main {
 
        Product product=new Product(1,"test",10,1);
 
-
+        //-->addCategory
        //       int result;
 //       result=categortService.add(category);
 //       if(result == 0)
@@ -25,8 +25,12 @@ public class Main {
 //           System.out.println("CategorryNotAdded");
 //       if(result==1)
 //           System.out.println("CategoryAdded");
-       System.out.println(productService.add(product));
 
+       //-->addProduct
+//      System.out.println(productService.add(product));
+
+       //-->deleteProduct
+       System.out.println(productService.delete(product));
    }
 
 }

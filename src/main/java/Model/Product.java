@@ -5,8 +5,8 @@ import lombok.*;
 @Setter
 @ToString
 public class Product {
-    int id;
-    String productName;
-    int quantity;
-    int categoryId;
+   private int id;
+    private String productName;
+    private int quantity;
+    private int categoryId;
 }

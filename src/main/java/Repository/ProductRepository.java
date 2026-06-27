@@ -29,4 +29,13 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         return result;
 
     }
+    public int delete(int id) throws SQLException {
+        Connection connection=jdbcConnection.getConnection();
+        String delete="delete from product where id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(delete);
+        preparedStatement.setInt(1,id);
+        int result=preparedStatement.executeUpdate();
+        jdbcConnection.closeConnections(connection,preparedStatement);
+        return result;
+    }
 }

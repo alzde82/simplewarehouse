@@ -4,8 +4,10 @@ import Repository.ProductRepository;
 import Service.CategortService;
 import java.sql.SQLException;
 public class ProductService {
+
     private CategortService categortService=new CategortService();
     private ProductRepository dataBase=new ProductRepository();
+
 public int add(Product product) throws SQLException {
     if(dataBase.isProductNameExists(product.getProductName()))
         return 0;
@@ -15,4 +17,9 @@ public int add(Product product) throws SQLException {
 
 
 }
+public int delete(Product product) throws SQLException {
+    return dataBase.delete(product.getId());
+
+}
+
 }
