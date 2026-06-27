@@ -51,8 +51,9 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
                 ResultSet.CONCUR_READ_ONLY);
         preparedStatement.setString(1, name);
         ResultSet resultSet=preparedStatement.executeQuery();
-
-            return listOfProducts(resultSet);
+            list= listOfProducts(resultSet);
+            jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+            return list;
 
     }
 
@@ -67,6 +68,7 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
             list.add(product);
         }
         while(resultSet.next());
+
         return list;
     }
 }
