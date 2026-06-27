@@ -1,5 +1,6 @@
 import Service.*;
 import Model.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.sql.SQLException;
 
@@ -15,5 +16,7 @@ public class Main {
            System.out.println("CategorryNotAdded");
        if(result==1)
            System.out.println("CategoryAdded");
+       System.out.println("test");
    }
+
 }
