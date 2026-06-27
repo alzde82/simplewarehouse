@@ -52,16 +52,21 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         preparedStatement.setString(1, name);
         ResultSet resultSet=preparedStatement.executeQuery();
 
-            if(!resultSet.next())
-                return null;
-            do{
-                Product product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
-                        ,resultSet.getInt("categoryid"));
-                product.setId(resultSet.getInt("id"));
-                list.add(product);
-            }
-            while(resultSet.next());
-        return list;
+            return listOfProducts(resultSet);
 
+    }
+
+    private DynamicArrays listOfProducts(ResultSet resultSet) throws SQLException {
+        DynamicArrays list=new DynamicArrays("Product");
+        if(!resultSet.next())
+            return null;
+        do{
+            Product product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
+                    ,resultSet.getInt("categoryid"));
+            product.setId(resultSet.getInt("id"));
+            list.add(product);
+        }
+        while(resultSet.next());
+        return list;
     }
 }
