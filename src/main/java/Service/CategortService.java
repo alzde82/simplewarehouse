@@ -13,4 +13,7 @@ public class CategortService {
             return 0;
         return dataBase.add(category);
     }
+    public boolean isCategoryIdExists(int id) throws SQLException {
+        return dataBase.isCategoryIdExists(id);
+    }
 }

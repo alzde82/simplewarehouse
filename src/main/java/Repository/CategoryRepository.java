@@ -15,7 +15,6 @@ public class CategoryRepository {
         return result;
     }
     public boolean isCategoryIdExists(int id) throws SQLException {
-
         Connection connection=jdbcConnection.getConnection();
         String select= "SELECT id FROM category WHERE id = ?";
         PreparedStatement preparedStatement=connection.prepareStatement(select, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -25,6 +24,7 @@ public class CategoryRepository {
         boolean result=resultSet.next();
         jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
         return result;
+
     }
     public boolean isCategoryNameExists(String name) throws SQLException {
         Connection connection=jdbcConnection.getConnection();
