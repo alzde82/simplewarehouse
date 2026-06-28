@@ -35,5 +35,13 @@ public int delete(Product product) throws SQLException {
         return -1;
     return dataBase.updateProductQuantity(addedquantity,id);
 }
+        public int decreaseQuantityOfProduct(int id , int addedquantity) throws SQLException {
+            int vessel=validation.negativeNumber(addedquantity);
+            if(!dataBase.isProductIdExists(id) || !dataBase.isProductHaveQuantity(id) ||
+                    dataBase.findProductById(id).getQuantity() <addedquantity)
+                return 0;
+            return dataBase.updateProductQuantity(vessel,id);
 
+
+        }
 }

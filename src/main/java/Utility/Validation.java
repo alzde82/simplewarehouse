@@ -5,4 +5,7 @@ public class Validation {
         String newName="%"+ name +"%";
         return newName;
     }
+    public int negativeNumber(int number){
+        return number * (-1);
+    }
 }

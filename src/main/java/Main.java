@@ -1,5 +1,6 @@
 import Service.*;
 import Model.*;
+import Utility.Validation;
 import org.DynamicArray.DynamicArrays;
 import org.w3c.dom.ls.LSOutput;
 
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 
 public class Main {
    public static void main(String [] args) throws SQLException {
-
+        Validation  validation= new Validation();
        CategortService categortService=new CategortService();
        ProductService productService = new ProductService();
 
@@ -41,9 +42,14 @@ public class Main {
 //            for (int i = 0; i < list.length() ; i++) {
 //                System.out.println(list.findObjectByIndex(i));
 //            }
-       System.out.println(productService.increaseQuantityOfProduct(10,7));
 
+       //-->InceraseQuantityOfProduct
+//       System.out.println(productService.increaseQuantityOfProduct(10,7));
+
+        //-->DecreaseQuantityOfProduct
+       System.out.println(productService.decreaseQuantityOfProduct(11,1));
    }
+
 
    }
 
