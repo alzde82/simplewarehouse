@@ -44,4 +44,7 @@ public int delete(Product product) throws SQLException {
 
 
         }
+        public int totalQuantity() throws SQLException {
+    return dataBase.totalQuantity();
+        }
 }
