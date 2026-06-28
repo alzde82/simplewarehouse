@@ -42,9 +42,12 @@ public class Main {
 //            for (int i = 0; i < list.length() ; i++) {
 //                System.out.println(list.findObjectByIndex(i));
 //            }
+
+       //-->InceraseQuantityOfProduct
 //       System.out.println(productService.increaseQuantityOfProduct(10,7));
 
-       System.out.println(productService.decreaseQuantityOfProduct(11,));
+        //-->DecreaseQuantityOfProduct
+       System.out.println(productService.decreaseQuantityOfProduct(11,1));
    }
 
 
