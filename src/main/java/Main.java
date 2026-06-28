@@ -47,7 +47,10 @@ public class Main {
 //       System.out.println(productService.increaseQuantityOfProduct(10,7));
 
         //-->DecreaseQuantityOfProduct
-       System.out.println(productService.decreaseQuantityOfProduct(11,1));
+//       System.out.println(productService.decreaseQuantityOfProduct(13,4));
+       //-->totalQuantity
+       System.out.println(productService.totalQuantity());
+
    }
 
 

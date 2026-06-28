@@ -138,4 +138,15 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         return true;
 
     }
+    public int totalQuantity() throws SQLException {
+        Connection connection = jdbcConnection.getConnection();
+        String select =" SELECT SUM(quantity) FROM product ";
+        PreparedStatement preparedStatement=connection.prepareStatement(select);
+        ResultSet resultSet=preparedStatement.executeQuery();
+        resultSet.next();
+        int result=resultSet.getInt("sum");
+        jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+        return result;
+
+    }
 }
