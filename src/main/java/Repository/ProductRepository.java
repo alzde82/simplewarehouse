@@ -33,6 +33,23 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         return result;
 
     }
+    public Product findProductById(int id) throws SQLException {
+        Product product;
+        Connection connection = jdbcConnection.getConnection();
+        String select = "SELECT * FROM product WHERE id= ?";
+        PreparedStatement preparedStatement=connection.prepareStatement(select);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet=preparedStatement.executeQuery();
+        if(resultSet.next()){
+            product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
+                    ,resultSet.getInt("categoryid"));
+            product.setId(resultSet.getInt("id"));
+            jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+        }
+        else return null;
+
+        return product;
+    }
     public int delete(int id) throws SQLException {
         Connection connection=jdbcConnection.getConnection();
         String delete="delete from product where id=?";
@@ -57,19 +74,19 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
 
     }
 
-    private DynamicArrays listOfProducts(ResultSet resultSet) throws SQLException {
-        DynamicArrays list=new DynamicArrays("Product");
-        if(!resultSet.next())
-            return null;
-        do{
-            Product product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
-                    ,resultSet.getInt("categoryid"));
-            product.setId(resultSet.getInt("id"));
-            list.add(product);
-        }
-        while(resultSet.next());
+                    private DynamicArrays listOfProducts(ResultSet resultSet) throws SQLException {
+                        DynamicArrays list=new DynamicArrays("Product");
+                        if(!resultSet.next())
+                            return null;
+                        do{
+                            Product product=new Product(resultSet.getString("name"),resultSet.getInt("quantity")
+                                    ,resultSet.getInt("categoryid"));
+                            product.setId(resultSet.getInt("id"));
+                            list.add(product);
+                        }
+                        while(resultSet.next());
 
-        return list;
+                        return list;
     }
     public int updateProductQuantity(int quantity,int id) throws SQLException {
         Connection connection = jdbcConnection.getConnection();
@@ -103,6 +120,22 @@ private     JDBCConnection jdbcConnection=new JDBCConnection();
         jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
         return result;
 
+
+    }
+    public boolean isProductHaveQuantity(int id) throws SQLException {
+        Connection connection = jdbcConnection.getConnection();
+        String select="SELECT quantity FRoM product WHERE id=?";
+        PreparedStatement preparedStatement=connection.prepareStatement(select);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet=preparedStatement.executeQuery();
+        resultSet.next();
+        if(resultSet.getInt("quantity")<=0) {
+            jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+            return false;
+        }
+        else
+            jdbcConnection.closeConnections(connection,preparedStatement,resultSet);
+        return true;
 
     }
 }
